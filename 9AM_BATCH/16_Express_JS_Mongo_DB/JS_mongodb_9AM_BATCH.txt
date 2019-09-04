@@ -1,0 +1,116 @@
+-----------------------------------------------------
+				LOCAL DATABASE JAVASCRIPT
+
+    http://mongodb.github.io/node-mongodb-native/3.2/tutorials/main/
+-----------------------------------------------------
+INSERT RECORDS
+--------------
+let employeeOne = {
+    name : 'Rajan',
+    age: 25,
+    designation : 'Software Engineer',
+    active : true
+};
+
+db.collection('employee').insertOne(employeeOne,(err,r) => {
+    console.log('Record is inserted' , employeeOne);
+    client.close();
+});
+
+-----------------------------------------------------------
+
+let employeeTwo = {
+    name : 'Mahesh',
+    age: 28,
+    designation : 'Sr.Software Engineer',
+    active : false
+};
+
+db.collection('employee').insertOne(employeeTwo,(err,r) => {
+    console.log('Record is inserted' , employeeTwo);
+    client.close();
+});
+
+INSERT MULPLE RECORDS
+----------------------
+let employees = [
+    {
+        name : 'John',
+        age: 38,
+        designation : 'Project Manager',
+        active : true
+    },
+    {
+        name : 'Wilson',
+        age: 45,
+        designation : 'Sr.Project Manager',
+        active : false
+    }
+];
+
+db.collection('employee').insertMany(employees,(err,r) => {
+    console.log('Record are inserted' , employees);
+    client.close();
+});
+
+UPDATE RECORDS
+--------------
+db.collection('employee').updateOne({ name: 'Mahesh' },
+{
+    $set: {
+        age: 30,
+        designation: 'Team Lead'
+    }
+}, (err , r) => {
+    console.log('Updated a Record');
+    client.close();
+});
+
+---------------------------------------------------
+
+db.collection('employee').updateOne({ name: 'Wilson' },
+{
+    $set: {
+        designation: 'Delivery Manager'
+    }
+}, (err , r) => {
+    console.log('Updated a Record');
+    client.close();
+});
+
+
+READ RECORDS
+---------------
+db.collection('employee').find().toArray((err,employees) => {
+    console.log('We found the below Employees from database');
+    console.log(employees);
+	client.close();
+});
+
+------------------------------------
+db.collection('employee').find({name : 'John'}).toArray((err,employees) => {
+    console.log('We found the below Employees from database');
+    console.log(employees);
+	client.close();
+});
+
+DELETE RECORDS
+---------------
+
+db.collection('employee').deleteOne({name : 'John'}, (err , r) => {
+    console.log('Record is deleted ');
+    client.close();
+});
+
+
+db.collection('employee').deleteOne({name : 'Wilson'}, (err , r) => {
+    console.log('Record is deleted ');
+    client.close();
+});
+
+	
+	
+	
+	
+
+

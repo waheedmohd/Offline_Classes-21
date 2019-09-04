@@ -1,0 +1,78 @@
+Official Document for Mongo DB Shell commands
+-------------------------------------------------
+https://docs.mongodb.com/manual/reference/mongo-shell/
+-----------------------------------------------------
+
+INSERT SINGLE RECORD
+----------------------
+db.employee.insertOne({
+	name : 'Mahesh',
+	age : 28,
+	designation : 'Sr.Software Engineer',
+	active : false
+});
+
+INSERT MULTIPLE RECORDS
+----------------------
+
+db.employee.insertMany([
+	{
+		name : 'John',
+		age : 38,
+		designation : 'Project Manager',
+		active : true
+	},
+	{
+		name : 'Wilson',
+		age : 45,
+		designation : 'Sr.Project Manager',
+		active : false
+	}
+]);
+
+READ RECORDS
+------------
+db.employee.find().pretty();
+
+db.employee.find({name : 'John'}).pretty();
+
+db.employee.find({age : 28}).pretty();
+
+conditional READ
+-----------------
+Junior Employees : age <= 30
+----------------
+db.employee.find({ age: { $lte: 30 } }).pretty();
+
+Senior Employees : age > 30
+----------------
+db.employee.find({ age: { $gt: 30 } }).pretty();
+
+UPDATE RECORDS
+---------------
+db.employee.update({ name: 'Mahesh' },
+{
+  $set: {
+    age: 30,
+    designation: 'Team Lead'
+  }
+});
+
+db.employee.update({ name: 'Wilson' },
+{
+  $set: {
+    designation: 'Delivery Manager'
+  }
+});
+
+DELETE RECORDS
+--------------
+db.employee.deleteOne({name : 'John'});
+
+db.employee.deleteOne({
+	_id : ObjectId("5d6f36b0791bbccfd212f7a8")
+});
+
+
+
+
